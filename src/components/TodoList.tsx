@@ -1,5 +1,7 @@
 import { Todo } from "@/types";
 
+export const dynamic = "force-dynamic";
+
 export default async function TodoList() {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/todos`;
   console.log("url", url);
