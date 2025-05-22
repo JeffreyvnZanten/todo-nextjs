@@ -1,4 +1,3 @@
-import Image from "next/image";
 import "./page.css";
 import TodoList from "@/components/TodoList";
 import Loading from "./Loading";
