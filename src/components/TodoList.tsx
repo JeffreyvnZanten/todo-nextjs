@@ -4,7 +4,9 @@ export const dynamic = "force-dynamic";
 
 export default async function TodoList() {
   const url = `${process.env.API_URL}/api/v1/todos`;
+  console.log("url", url);
   const res = await fetch(url, { cache: "no-store" });
+  console.log("res", res);
   if (!res.ok) {
     throw new Error("Kon todos niet laden");
   }
