@@ -1,7 +1,7 @@
 import { Todo } from "@/types";
 
 export default async function TodoList() {
-  const url = `${process.env.API_URL}/api/v1/todos`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/todos`;
   console.log("url", url);
   const res = await fetch(url, {});
   console.log("res?", res);
