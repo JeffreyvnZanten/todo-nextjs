@@ -1,23 +1,38 @@
 import { Todo } from "@/types";
 
 export default async function TodoList() {
-  //   const url = `${process.env.API_URL}/api/v1/todos`;
-  //   console.log("url", url);
-  //   const res = await fetch(url, { cache: "no-store" });
-  //   console.log("res", res);
-  const res = await fetch("/api/v1/todos", { cache: "no-store" });
+  // 1️⃣  Declareer todos in de function-scope
+  let todos: Todo[] = [];
 
-  if (!res.ok) {
-    throw new Error("Kon todos niet laden");
+  try {
+    const base = process.env.API_URL ?? "http://api:3000"; // 3️⃣ fallback
+    const url = `${base}/api/v1/todos`;
+
+    console.log("fetching", url);
+
+    const res = await fetch(url, { cache: "no-store" });
+
+    if (!res.ok) {
+      throw new Error(`Fetch failed: ${res.status} ${res.statusText}`);
+    }
+
+    todos = await res.json();
+  } catch (err) {
+    console.error("Kon todos niet laden", err);
   }
-  const todos: Todo[] = await res.json();
+
+  // 2️⃣  Toon altijd iets terug
   return (
     <div>
-      {todos.map((todo) => (
-        <p key={todo.id}>
-          {todo.title} {todo.isCompleted ? "✅" : "❌"}
-        </p>
-      ))}
+      {todos.length === 0 ? (
+        <p>(Geen taken gevonden)</p>
+      ) : (
+        todos.map((todo) => (
+          <p key={todo.id}>
+            {todo.title} {todo.isCompleted ? "✅" : "❌"}
+          </p>
+        ))
+      )}
     </div>
   );
 }
