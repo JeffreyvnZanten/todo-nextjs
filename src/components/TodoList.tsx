@@ -1,11 +1,10 @@
 import { Todo } from "@/types";
 
 export default async function TodoList() {
-  // 1️⃣  Declareer todos in de function-scope
   let todos: Todo[] = [];
 
   try {
-    const base = process.env.API_URL ?? "http://api:3000"; // 3️⃣ fallback
+    const base = process.env.API_URL ?? "http://api:3000";
     const url = `${base}/api/v1/todos`;
 
     console.log("fetching", url);
@@ -21,7 +20,6 @@ export default async function TodoList() {
     console.error("Kon todos niet laden", err);
   }
 
-  // 2️⃣  Toon altijd iets terug
   return (
     <div>
       {todos.length === 0 ? (
