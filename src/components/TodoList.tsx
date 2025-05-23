@@ -5,8 +5,7 @@ export default async function TodoList() {
 
   try {
     const base = process.env.API_URL ?? "http://api:3000";
-    let url = "http://api/api/v1/todos";
-    // const url = `${base}/api/v1/todos`;
+    const url = `${base}/api/v1/todos`;
 
     console.log("fetching", url);
 
